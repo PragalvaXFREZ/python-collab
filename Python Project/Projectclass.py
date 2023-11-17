@@ -37,8 +37,9 @@ class OpenDir:
 
         self.read_pages(self)
 
-file = OpenDir()
-file.run()
-file.merge_pdf()
+if __name__ == "__main__":
+    file = OpenDir()
+    file.run()
+    file.merge_pdf()
 
 

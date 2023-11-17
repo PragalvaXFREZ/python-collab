@@ -1,2 +1,2 @@
 # python-collab
-Gay pragalva
+So this collab is about creating a kinda useable pdf merger.

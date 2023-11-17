@@ -1,24 +1,44 @@
-from pypdf import PdfWriter
+from PyPDF2 import PdfReader
+from PyPDF2 import PdfWriter
+import tkinter as tk
+from tkinter import filedialog
 
 merger = PdfWriter()
 
-input1 = open("Pdf-List\\document1.pdf", "rb")
-input2 = open("Pdf-List\\document2.pdf", "rb")
-input3 = open("Pdf-List\\document3.pdf", "rb")
+root = tk.Tk()
+class OpenDir:
+    def __init__(self) -> None:
+        self.pdf_number = int(input("Enter the no of pdf's you want to merge:")) 
+        self.pdf_lst = [] 
 
-# Add the first 3 pages of input1 document to output
-merger.append(fileobj=input1, pages=(0, 2))
+    def opendir(self,cls):
+        self.path = filedialog.askopenfilename(title="Select a File", filetypes=[("PDF Files", "*.pdf"), ("All files", "*.*")])
+        self.pdf_lst.append(self.path)
 
-# Insert the first page of input2 into the output beginning after the second page
-merger.merge(position=2, fileobj=input2, pages=(0, 373))
 
-# Append entire input3 document to the end of the output document
-merger.append(input3)
 
-# Write to an output PDF document
-output = open("document-output.pdf", "wb")
-merger.write(output)
+    def read_pages(self,cls):
+        for self.pdf_path in self.pdf_lst:
+            self.pdfreader = PdfReader(self.pdf_path)
+            self.totalpages = len(self.pdfreader.pages)
+            print(self.totalpages)
 
-# Close file descriptors
-merger.close()
-output.close()
+    def merge_pdf(self):
+        for self.pdf_path in self.pdf_lst:
+            merger.append(self.pdf_path)
+
+        with open("Merged_File.pdf","wb") as pdf:
+            merger.write(pdf) 
+
+    def run(self):
+        self.i = 0
+        for self.i in range(0,self.pdf_number):
+            self.opendir(self)
+
+        self.read_pages(self)
+
+file = OpenDir()
+file.run()
+file.merge_pdf()
+
+

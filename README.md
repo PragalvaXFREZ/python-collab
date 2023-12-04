@@ -34,4 +34,4 @@ This script allows you to merge multiple PDF files into a single PDF document us
 1. Clone the repository:
 
    ```bash
-   git clone git@github.com:PragalvaXFREZ/python-collab.git
+   git clone git@github.com:T-Poison10/python-collab.git
